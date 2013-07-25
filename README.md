@@ -10,5 +10,18 @@ backup dlink switches
 Supported hardware
 ------------------
 
-* dlink DES-3526
+
+### D-Link
+
+
+* dlink DES-3052
+* dlink DES-3200-10
+* dlink DES-3200-26
 * dlink DES-3200-28
+* dlink DES-3526
+* dlink DES-3552
+* dlink DGS-3312SR
+
+### SNR
+
+* SNR-S2950-24G

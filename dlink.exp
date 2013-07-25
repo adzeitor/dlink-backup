@@ -9,31 +9,124 @@ spawn telnet $host
 
 expect {
 
-    eof  {break}
-    "DES-3526"   {
-	set username "username:"
-	set password "password:"
-	set upload "upload cfg_toTFTP $tftp $config"
-	set logout "logout"
-	set greeting "#"
-	set success "Done.\r\r"
+    eof  {exit}
+
+    # SNR-S2950-24G
+    "login" {
+        set password "Password:"
+
+        set upload "copy startup.cfg tftp://$tftp/$config"
+        set success "client."
+        set greeting "#"
+
+        send "$user\r"
+        expect "$password"
+        send "$pass\r"
+        expect "#"
+        send "$upload\r"
+        expect ":"
+        send "Y\r"
+        expect "$greeting"
+        exit
     }
 
-    "DES-3200-28"   {
-	set username "UserName:"
-	set password "PassWord:"
-	set upload "upload cfg_toTFTP $tftp dest_file $config"
-	set logout "logout"
-	set greeting "#"
-	set success "Success."
+    "DES-2108"   {
+        # return error
+        exit 5
     }
+
+    "DES-3526"   {
+        set username "username:"
+        set password "password:"
+        set upload "upload cfg_toTFTP $tftp $config"
+        set upload2 "upload cfg_toTFTP $tftp $config"
+        set logout "logout"
+        set greeting "#"
+        set success "Done."
+    }
+
+    "DES-3552" {
+        set username "UserName:"
+        set password "PassWord:"
+        set upload "upload cfg_toTFTP $tftp dest_file $config"
+        set upload2 "upload cfg_toTFTP $tftp $config"
+        set logout "logout"
+        set greeting "#"
+        set success "Done."
+    }
+
+    "DES-3052" {
+        set username "UserName:"
+        set password "PassWord:"
+        set upload "upload cfg_toTFTP $tftp dest_file $config"
+        set upload2 "upload cfg_toTFTP $tftp $config"
+        set logout "logout"
+        set greeting "#"
+        set success "Done."
+    }
+
+
+    "DES-3200-28"   {
+        set username "UserName:"
+        set password "PassWord:"
+        set upload "upload cfg_toTFTP $tftp dest_file $config"
+        set upload2 "upload cfg_toTFTP $tftp $config"
+        set logout "logout"
+        set greeting "#"
+        set success "Success."
+    }
+
+    "DES-3200-26"   {
+        set username "UserName:"
+        set password "PassWord:"
+        set upload "upload cfg_toTFTP $tftp dest_file $config"
+        set upload2 "upload cfg_toTFTP $tftp $config"
+        set logout "logout"
+        set greeting "#"
+        set success "Success."
+    }
+
+
+
+    "DES-3200-10"   {
+        set username "UserName:"
+        set password "PassWord:"
+        set upload "upload cfg_toTFTP $tftp $config"
+        set upload2 "upload cfg_toTFTP $tftp dest_file $config"
+        set logout "logout"
+        set greeting "#"
+        set success "Success."
+    }
+
+    "DGS-3312SR" {
+        set username "UserName:"
+        set password "PassWord:"
+        set upload "upload configuration $tftp $config"
+        set upload2 "upload configuration $tftp $config"
+        set logout "logout"
+        set greeting "#"
+        set success "Done."
+    }
+
+
 }
+
 expect "$username"
 send "$user\r"
 expect "$password"
 send "$pass\r"
+
 send "$upload\r"
-expect "$success"
+expect {
+    "$success" {
+    }
+    "$greeting" {
+        send "$upload2\r"
+        expect "$success"
+    }
+}
+
 expect "$greeting"
+
 send "$logout\r"
 expect eof
