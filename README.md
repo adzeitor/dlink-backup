@@ -1,11 +1,14 @@
 dlink-backup
 ============
 
-backup dlink switch:
+backup config
+-------------
 
     $ ./dlink.exp switch_addr user pass config_name tftp_host
 
-mass backup:
+
+mass backup
+-----------
 
 1. edit 1.list (see example default.list)
 2. install expect
@@ -15,11 +18,11 @@ mass backup:
 
 
 Supported hardware
-------------------
+==================
 
 
-### D-Link
-
+D-Link
+------
 
 * dlink DES-3052
 * dlink DES-3200-10
@@ -29,6 +32,7 @@ Supported hardware
 * dlink DES-3552
 * dlink DGS-3312SR
 
-### SNR
+SNR
+---
 
 * SNR-S2950-24G
