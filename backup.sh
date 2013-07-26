@@ -1,5 +1,5 @@
 #!/bin/sh
-list=1.list
+list="1.list"
 expect="expect"
 tftp="192.168.100.62"
 tftpdir="/srv/tftp/"

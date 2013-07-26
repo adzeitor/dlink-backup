@@ -1,10 +1,17 @@
 dlink-backup
 ============
 
-backup dlink switches
+backup dlink switch:
 
+    $ ./dlink.exp switch_addr user pass config_name tftp_host
 
-    $ ./dlink.exp host user pass config_name tftp_host
+mass backup:
+
+1. edit 1.list (see example default.list)
+2. install expect
+3. edit backup.sh (tftp host,tftp directory, backup directory and others)
+4. ```$ ./backup.sh```
+5. check backup dir for configs
 
 
 Supported hardware
