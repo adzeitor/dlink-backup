@@ -108,6 +108,16 @@ expect {
         set success "Done."
     }
 
+    "DGS-1210-48" {
+        set username "UserName:"
+        set password "PassWord:"
+        set upload "upload cfg_toTFTP $tftp $config"
+        set upload2 "upload cfg_toTFTP $tftp $config"
+        set logout "logout"
+        set greeting "#"
+        set success "Done."
+    }
+
 
 }
 
